@@ -1,0 +1,60 @@
+# Vocabulário controlado de parâmetros de referência (seção 8.6).
+# Parâmetro ou unidade fora deste arquivo exige mapeamento confirmado pelo usuário.
+#
+# PROVISORIO: nomes canônicos, unidades aceitas e faixas plausíveis aguardam decisão do
+# pesquisador (PENDENCIAS_CIENTIFICAS.md, P-07). As faixas abaixo contêm apenas limites
+# físicos (percentual entre 0 e 100; concentração não negativa); nenhum limite empírico
+# foi inventado. Valor fora da faixa gera ALERTA, não rejeição.
+version: 1
+status: PROVISORIO
+parameters:
+  - name: "C16:0"
+    label: Ácido palmítico
+    analysis_type: fatty_acid_profile
+    aliases: [C16_0, C160, palmitic, palmitico]
+    units: ["%"]
+    plausible_range: {min: 0.0, max: 100.0}
+  - name: "C18:0"
+    label: Ácido esteárico
+    analysis_type: fatty_acid_profile
+    aliases: [C18_0, C180, stearic, estearico]
+    units: ["%"]
+    plausible_range: {min: 0.0, max: 100.0}
+  - name: "C18:1"
+    label: Ácido oleico
+    analysis_type: fatty_acid_profile
+    aliases: [C18_1, C181, oleic, oleico]
+    units: ["%"]
+    plausible_range: {min: 0.0, max: 100.0}
+  - name: "C18:2"
+    label: Ácido linoleico
+    analysis_type: fatty_acid_profile
+    aliases: [C18_2, C182, linoleic, linoleico]
+    units: ["%"]
+    plausible_range: {min: 0.0, max: 100.0}
+  - name: "C18:3"
+    label: Ácido linolênico
+    analysis_type: fatty_acid_profile
+    aliases: [C18_3, C183, linolenic, linolenico]
+    units: ["%"]
+    plausible_range: {min: 0.0, max: 100.0}
+  - name: TBARS
+    label: Substâncias reativas ao ácido tiobarbitúrico
+    analysis_type: oxidation
+    aliases: [tbars]
+    units: ["mg MDA/kg"]
+    plausible_range: {min: 0.0, max: null}
+  - name: PV
+    label: Índice de peróxidos
+    analysis_type: oxidation
+    aliases: [peroxide_value, peroxide, peroxidos, indice_de_peroxidos, ip]
+    units: ["meq O2/kg"]
+    plausible_range: {min: 0.0, max: null}
+# Grafias equivalentes de unidade (só variação de escrita; nunca conversão de valor).
+unit_aliases:
+  "meq O₂/kg": "meq O2/kg"
+  "meqO2/kg": "meq O2/kg"
+  "mEq O2/kg": "meq O2/kg"
+  "mg MDA / kg": "mg MDA/kg"
+  "mgMDA/kg": "mg MDA/kg"
+  "percent": "%"

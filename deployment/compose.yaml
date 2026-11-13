@@ -1,0 +1,42 @@
+# Aplicação + PostgreSQL. Executar da raiz do repositório:
+#   export LIPIDENCE_DB_PASSWORD=<senha>
+#   podman compose -f lipidence_modular/deployment/compose.yaml up --build
+# Criar o primeiro ADMIN:
+#   podman compose -f lipidence_modular/deployment/compose.yaml exec app \
+#     python -m lipidence_modular user create --username <nome> --role ADMIN
+name: lipidence-modular
+
+services:
+  db:
+    image: docker.io/library/postgres:16-alpine
+    environment:
+      POSTGRES_USER: lipidence
+      POSTGRES_PASSWORD: ${LIPIDENCE_DB_PASSWORD:?defina LIPIDENCE_DB_PASSWORD}
+      POSTGRES_DB: lipidence_modular
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lipidence -d lipidence_modular"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  app:
+    build:
+      context: ../..
+      dockerfile: lipidence_modular/deployment/Containerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      LIPIDENCE_DATABASE_URL: postgresql+psycopg2://lipidence:${LIPIDENCE_DB_PASSWORD:?defina LIPIDENCE_DB_PASSWORD}@db:5432/lipidence_modular
+      LIPIDENCE_STORAGE_DIR: /var/lib/lipidence/artifacts
+      LIPIDENCE_ENV: ${LIPIDENCE_ENV:-development}
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - artifacts:/var/lib/lipidence/artifacts
+
+volumes:
+  pgdata:
+  artifacts:

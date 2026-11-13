@@ -1,0 +1,14 @@
+# Limiares de qualidade espectral (seção 8.5).
+# Valores herdados de backend/app/ml/spectral_quality.py@e027e41 (DEFAULTS).
+# PROVISORIO: todos aguardam decisão do pesquisador (PENDENCIAS_CIENTIFICAS.md, P-12).
+status: PROVISORIO
+min_points: 100
+max_points: 5000
+nir_min_nm: 700.0
+nir_max_nm: 2600.0
+absorbance_min: -1.0
+absorbance_max: 5.0
+min_snr: 50.0
+min_dynamic_range: 0.001
+max_saturation_ratio: 0.02
+irregular_step_cv: 0.1

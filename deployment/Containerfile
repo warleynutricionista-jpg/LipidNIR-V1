@@ -1,0 +1,23 @@
+# Imagem da aplicação Lipidence-NIR Modular (Podman ou Docker).
+# Construir a partir da raiz do repositório:
+#   podman build -f lipidence_modular/deployment/Containerfile -t lipidence-modular .
+FROM docker.io/library/python:3.11-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1
+
+WORKDIR /srv
+COPY lipidence_modular/requirements.txt /srv/lipidence_modular/requirements.txt
+RUN pip install -r /srv/lipidence_modular/requirements.txt
+COPY lipidence_modular /srv/lipidence_modular
+
+# Usuário sem privilégios; os artefatos vivem em um volume.
+RUN useradd --create-home --uid 10001 lipidence \
+    && mkdir -p /var/lib/lipidence/artifacts \
+    && chown -R lipidence /var/lib/lipidence
+USER lipidence
+
+ENV LIPIDENCE_STORAGE_DIR=/var/lib/lipidence/artifacts
+EXPOSE 8000
+CMD ["sh", "-c", "python -m lipidence_modular db upgrade && python -m lipidence_modular serve --host 0.0.0.0 --port 8000"]
