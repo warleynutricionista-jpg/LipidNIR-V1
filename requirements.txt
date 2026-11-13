@@ -1,0 +1,25 @@
+# Dependências de execução do lipidence_modular (Python 3.11).
+# Versões científicas partem de backend/requirements/base.txt (seção 5.4);
+# divergências estão em docs/ARCHITECTURE_DECISIONS.md (ADM-002).
+# Fase 0/1: núcleo, banco, autenticação, interface.
+dash[fastapi]==4.5.0
+fastapi==0.162.5
+pydantic==2.14.3
+uvicorn==0.54.0
+python-multipart==0.0.33
+sqlalchemy==2.0.25
+alembic==1.13.1
+psycopg2-binary==2.9.9
+argon2-cffi==25.1.0
+PyYAML==6.0.1
+plotly==5.18.0
+# Científicas (mesmas versões do sistema atual)
+numpy==1.26.3
+pandas==2.1.4
+scipy==1.11.4
+scikit-learn==1.4.0
+joblib==1.6.0
+# Retratos de dataset e consulta analítica
+pyarrow==26.0.1
+duckdb==2.0.0
+openpyxl==3.1.5

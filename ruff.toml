@@ -1,0 +1,17 @@
+target-version = "py311"
+line-length = 100
+
+[lint]
+select = ["E", "F", "W", "I", "B", "UP", "N", "RUF"]
+allowed-confusables = ["×", "–", "σ", "α", "²"]
+
+[lint.pep8-naming]
+# Convenção de scikit-learn para matrizes.
+ignore-names = ["X", "X_*", "Y", "Y_*", "*_X", "*_Y", "T", "P", "W", "Q", "T2"]
+
+[lint.per-file-ignores]
+"**/tests/**" = ["N802", "N803", "N806"]
+"**/migrations/versions/*" = ["E501"]
+
+[lint.flake8-bugbear]
+extend-immutable-calls = ["fastapi.Depends", "fastapi.Query", "fastapi.File", "fastapi.Form", "fastapi.Cookie"]
